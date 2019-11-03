@@ -8,4 +8,4 @@ This type of problem is a latent-variable problem which can be solved using expe
 
 ## Problem assumptions
 
-There are two distributions of individuals: those that want to repay, and those that don't want to repay.  The times to default for both are exponentially distributed, but the parameter for the first group is much smaller than for the second (indicating more willingness to repay)
+There are two distributions of individuals: those that want to repay, and those that don't want to repay.  The times to default for both are exponentially distributed, but the parameter for the first group is much smaller than for the second (indicating more willingness to repay).  
