@@ -27,5 +27,6 @@ The goal of this project was
 Since this was a continuously learning exercise, I read quite a few articles online on E-M.  Two that were particularly helpful (and one of which I copied much of the code from) are:
 * http://www.svcl.ucsd.edu/courses/ece271A/handouts/EM2.pdf
 * http://tinyheero.github.io/2016/01/03/gmm-em.html#parameter-estimation-in-the-complete-data-scenario
+
 And a third that gave a more rigorous mathematical rationale for E-M:
 * https://www.stat.cmu.edu/~cshalizi/350/lectures/29/lecture-29.pdf
