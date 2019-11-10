@@ -40,7 +40,7 @@ We typically do this by taking derivatives with respect to the parameters and se
 
 \[\ell(\theta, p, q)=\sum_i \log\left(\sum_j p_j f(x_i|Z=p_j; \theta_j)\right)+q\left(\sum_j p_j-1\right)\]
 
-Now we can start taking derivatives with respect to the Lagrangian:
+Now we can start taking derivatives of the Lagrangian:
 
 \[\frac{\partial \ell}{\partial \theta_j}=\sum_i \left(p_j \frac{\partial f(x_i|Z=p_j; \theta_j)}{\partial \theta_j} \right) \frac{1}{\sum_j p_j f(x_i|Z=p_j; \theta_j)} \]
 \[=\sum_i \frac{\partial \log\left(f(x_i|Z=p_j; \theta_j)\right)}{\partial \theta_j} \frac{p_jf(x_i|Z=p_j; \theta_j)} {\sum_j p_j f(x_i|Z=p_j; \theta_j)}\]
