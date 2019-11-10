@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{cite}
+\usepackage{float}
+\usepackage{scrextend}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\setlength{\parindent}{0pt}
+\begin{document}
+\section{E-M for latent variable models}
+
+The lecture notes and slides over-complicate E-M for mixture models.  The derivation is quite simple.
+\\
+\\
+
+Let \(f(x; \theta)\) be the full distribution of a latent variable model.  The density for mixture models can be decomposed as follows (assuming independence):
+
+\[f(x; \theta)=f(x|z; \theta_x)f(z; \theta_z )\] 
+
+Where \(Z\) follows a discrete distribution and \(\theta_x\) and \(\theta_z\) are parameters specifically for \(X\) and \(Z\) respectively.  Since \(Z\) is discrete, this function can be written as 
+
+\[f(x; \theta)=\sum_j p_j f(x|Z=p_j; \theta_{x, j}),\,\sum_j p_j =1\]
+
+For notational simplicity, I will drop the notation \(\theta_{x, j}\) and simply revert to \(\theta_j\).
+\\
+\\
+Intuitively, we should maximize \(f(x; \theta)\) over the observed data to estimate \(\theta\).  We proceed down the path, though we should feel some discomfort since we don't observe \(z\) and so the problem may be tricky.
+
+\section{Maximize the likelihood}
+
+Given data \(x_i, i\in [1, 2, ..., n]\), we can try to maximize the log-likelihood:
+
+\[\max_{\theta, p} \sum_i \log\left(\sum_j p_j f(x_i|Z=p_j; \theta_j)\right)\]
+ 
+We typically do this by taking derivatives with respect to the parameters and setting the derivatives equal to zero.  However, we have the additional constraint that the probabilities for \(Z\) must sum to one, which requires us to create the Lagrangian:
+
+\[\ell(\theta, p, q)=\sum_i \log\left(\sum_j p_j f(x_i|Z=p_j; \theta_j)\right)+q\left(\sum_j p_j-1\right)\]
+
+Now we can start taking derivatives with respect to the Lagrangian:
+
+\[\frac{\partial \ell}{\partial \theta_j}=\sum_i \left(p_j \frac{\partial f(x_i|Z=p_j; \theta_j)}{\partial \theta_j} \right) \frac{1}{\sum_j p_j f(x_i|Z=p_j; \theta_j)} \]
+\[=\sum_i \frac{\partial \log\left(f(x_i|Z=p_j; \theta_j)\right)}{\partial \theta_j} \frac{p_jf(x_i|Z=p_j; \theta_j)} {\sum_j p_j f(x_i|Z=p_j; \theta_j)}\]
+\[=\sum_i h_{i,j} \frac{\partial \log\left(f(x_i|Z=p_j; \theta_j)\right)}{\partial \theta_j}\]
+Where \(h_{i,j}=\frac{p_jf(x_i|Z=p_j; \theta_j)} {\sum_j p_j f(x_i|Z=p_j; \theta_j)}\)
+
+\[\frac{\partial \ell}{\partial q}=\sum_j p_j-1\]
+
+\[\frac{\partial \ell}{\partial p_j}=\sum_i \frac{f(x_i|Z=p_j; \theta_j)}{\sum_j p_j f(x_i|Z=p_j; \theta_j)}+q \]
+\[=\sum_i \frac{h_{i,j}}{p_j}+q \]
+Setting each of these to zero (and treating \(h_{i,j}\) like a constant!) yields
+
+\[q=-\sum_j \sum_i h_{i,j}\]
+\[p_j=\frac{\sum_i h_{i, j}}{\sum_j \sum_i h_{i, j}}\]
+
+The E-M algorithm now becomes obvious: simply maximize the likelihood (for a given set of initial \(p\)), then set \(h_{i,j}\) with the updated \(p,\theta\), and repeat until convergence.
+
+\section{Example}
+
+Assume an mixture of two exponential distributions.  The maximization step (fixing \(h_{i,j}\)), is 
+\[\frac{\partial \ell}{\partial \theta_j}=\sum_i h_{i,j} \left(\frac{1}{\theta_j}-x_i\right)\]
+
+Setting this equal to zero yields 
+
+\[\theta_j=\frac{n}{\sum_i x_i}\]
+
+Updating the \(p_j\) are trivial.
+\\
+\\
+Then the next iteration of \(h_{i.j}\) can be found using the (new) \(\theta_j\), \(p_j\).
+
+\end{document}
