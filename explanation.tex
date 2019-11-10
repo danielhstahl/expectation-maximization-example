@@ -46,7 +46,7 @@ Now we can start taking derivatives of the Lagrangian:
 \[=\sum_i \frac{\partial \log\left(f(x_i|Z=p_j; \theta_j)\right)}{\partial \theta_j} \frac{p_jf(x_i|Z=p_j; \theta_j)} {\sum_j p_j f(x_i|Z=p_j; \theta_j)}\]
 \[=\sum_i h_{i,j} \frac{\partial \log\left(f(x_i|Z=p_j; \theta_j)\right)}{\partial \theta_j}\]
 Where \(h_{i,j}=\frac{p_jf(x_i|Z=p_j; \theta_j)} {\sum_j p_j f(x_i|Z=p_j; \theta_j)}\)
-
+Note that for many distributions we already have the partial derivative of the log likelihood with respect to the parameters; these are derived for standard maximum likelihood calculations.
 \[\frac{\partial \ell}{\partial q}=\sum_j p_j-1\]
 
 \[\frac{\partial \ell}{\partial p_j}=\sum_i \frac{f(x_i|Z=p_j; \theta_j)}{\sum_j p_j f(x_i|Z=p_j; \theta_j)}+q \]
@@ -54,7 +54,7 @@ Where \(h_{i,j}=\frac{p_jf(x_i|Z=p_j; \theta_j)} {\sum_j p_j f(x_i|Z=p_j; \theta
 Setting each of these to zero (and treating \(h_{i,j}\) like a constant!) yields
 
 \[q=-\sum_j \sum_i h_{i,j}\]
-\[p_j=\frac{\sum_i h_{i, j}}{\sum_j \sum_i h_{i, j}}\]
+\[p_j=\frac{\sum_i h_{i, j}}{\sum_j \sum_i h_{i, j}}=\frac{1}{n}\sum_i h_{i,j}\]
 
 The E-M algorithm now becomes obvious: simply maximize the likelihood (for a given set of initial \(p\)), then set \(h_{i,j}\) with the updated \(p,\theta\), and repeat until convergence.
 
@@ -65,11 +65,15 @@ Assume an mixture of two exponential distributions.  The maximization step (fixi
 
 Setting this equal to zero yields 
 
-\[\theta_j=\frac{n}{\sum_i x_i}\]
+\[\theta_j=\frac{\sum_i h_{i,j}}{\sum_i h_{i,j} x_i}\]
 
 Updating the \(p_j\) are trivial.
 \\
 \\
 Then the next iteration of \(h_{i.j}\) can be found using the (new) \(\theta_j\), \(p_j\).
+
+\section{Takeaway}
+
+If maximizing the parameters of a mixture model, the E-M algorithm is a simple extension of the process for finding the maximum likelihood parameters.  Most of the work has already been performed through finding the MLE for the base distribution(s).  
 
 \end{document}

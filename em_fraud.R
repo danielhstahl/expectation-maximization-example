@@ -61,7 +61,7 @@ realization_data=sapply(realization_alpha, function(indicator){
 
 init_lambda=1/mean(realization_data)
 
-for (i in 1:10000) {
+for (i in 1:n) {
   if (i == 1) {
     # Initialization
     e.step <- e_step(realization_data, c(init_lambda+.1, init_lambda-.1), c(0.4, 0.6))
