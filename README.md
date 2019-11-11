@@ -10,6 +10,10 @@ This type of problem is a latent-variable problem which can be solved using expe
 
 There are two distributions of individuals: those that want to repay, and those that don't want to repay.  The times to default for both are exponentially distributed, but the parameter for the first group is much smaller than for the second (indicating more willingness to repay).  
 
+## Mathematical formulation
+
+Many of the lecture notes I reviewed seemed to overcomplicate the problem.  I wrote the derivation in as concise a form as possible in [E-M Derivation](./explanation.pdf)
+
 ## Results
 
 I get very close results to the R package mixtools.  
