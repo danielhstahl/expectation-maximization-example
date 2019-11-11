@@ -46,7 +46,7 @@ Now we can start taking derivatives of the Lagrangian:
 \[=\sum_i \frac{\partial \log\left(f(x_i|Z=p_j; \theta_j)\right)}{\partial \theta_j} \frac{p_jf(x_i|Z=p_j; \theta_j)} {\sum_j p_j f(x_i|Z=p_j; \theta_j)}\]
 \[=\sum_i h_{i,j} \frac{\partial \log\left(f(x_i|Z=p_j; \theta_j)\right)}{\partial \theta_j}\]
 Where \(h_{i,j}=\frac{p_jf(x_i|Z=p_j; \theta_j)} {\sum_j p_j f(x_i|Z=p_j; \theta_j)}\)
-Note that for many distributions we already have the partial derivative of the log likelihood with respect to the parameters; these are derived for standard maximum likelihood calculations.
+Note that for many distributions we already have the partial derivative of the log likelihood with respect to the parameters; derived from standard maximum likelihood calculations.
 \[\frac{\partial \ell}{\partial q}=\sum_j p_j-1\]
 
 \[\frac{\partial \ell}{\partial p_j}=\sum_i \frac{f(x_i|Z=p_j; \theta_j)}{\sum_j p_j f(x_i|Z=p_j; \theta_j)}+q \]
