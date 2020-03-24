@@ -12,7 +12,7 @@ There are two distributions of individuals: those that want to repay, and those 
 
 ## Mathematical formulation
 
-Many of the lecture notes I reviewed seemed to overcomplicate the problem.  I wrote the derivation in as concise a form as possible in [E-M Derivation](./explanation.pdf).
+Many of the lecture notes I reviewed seemed to overcomplicate the problem.  I wrote the derivation in as concise a form as possible, and the PDF is available in the "Release" section of this repo. 
 
 ## Results
 
